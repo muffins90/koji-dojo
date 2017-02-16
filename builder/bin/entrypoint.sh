@@ -42,7 +42,7 @@ sed -i.bak '/allowed_scms=/d' /etc/kojid/kojid.conf
     cat <<EOF >> /etc/kojid/kojid.conf
 
 
-allowed_scms=myrepo.com:/*:no github.com:/*:no
+allowed_scms=src.fedoraproject.org:/*:no pkgs.fedoraproject.org:/*:no:fedpkg,sources
 
 ; The URL for the xmlrpc server
 server=http://koji-hub/kojihub

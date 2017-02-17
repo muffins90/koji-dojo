@@ -1,0 +1,10 @@
+KOJI="koji -c /opt/koji-clients/kojiadmin/config"
+$KOJI hello
+$KOJI add-tag destination-tag --include-all --arches="x86_64"
+$KOJI add-tag build-tag --include-all --arches="x86_64"
+$KOJI add-external-repo -t build-tag build-external-repo http://centos.eecs.wsu.edu/7/os/x86_64/
+$KOJI add-target build-target build-tag destination-tag
+koji show-groups --comps el7-build | $KOJI import-comps /dev/stdin build-tag
+$KOJI regen-repo build-tag
+#$KOJI build build-target git://pkgs.devel.redhat.com/rpms/koji#origin/eng-rhel-7
+$KOJI build --scratch build-target git://pkgs.devel.redhat.com/rpms/koji/#origin/eng-rhel-7
